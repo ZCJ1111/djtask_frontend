@@ -1,31 +1,28 @@
 <template>
-  <div class="dashboard-container">
-    <component :is="currentRole" />
+  <div class="app-container">
+
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import adminDashboard from './admin'
-import editorDashboard from './editor'
+
+import {get_announcement_list_api, push_feedback_api, save_announcement_api} from "@/api/user";
+import checkPermission from "@/utils/permission";
 
 export default {
   name: 'Dashboard',
-  components: { adminDashboard, editorDashboard },
   data() {
     return {
-      currentRole: 'adminDashboard'
+      addForm: {}
     }
-  },
-  computed: {
-    ...mapGetters([
-      'roles'
-    ])
   },
   created() {
-    if (!this.roles.includes('admin')) {
-      this.currentRole = 'editorDashboard'
-    }
+  },
+  mounted() {
+  },
+  methods: {
+    checkPermission,
+
   }
 }
 </script>
