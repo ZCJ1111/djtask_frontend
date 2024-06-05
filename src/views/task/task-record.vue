@@ -5,12 +5,13 @@
         <el-form :inline="true">
           <el-form-item>
             <el-date-picker
-                v-model="queryForm.query_date"
-                type="daterange"
-                value-format="yyyy-MM-dd"
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期">
+              v-model="queryForm.query_date"
+              :picker-options="pickerOptions"
+              type="daterange"
+              value-format="yyyy-MM-dd"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -29,12 +30,12 @@
           </vxe-toolbar>
 
           <vxe-table
-              highlight-hover-row
-              border="inner"
-              ref="xTable1"
-              height="650"
-              :export-config="{}"
-              :data="tableData">
+            highlight-hover-row
+            border="inner"
+            ref="xTable1"
+            height="650"
+            :export-config="{}"
+            :data="tableData">
             <vxe-table-column field="record_time" title="日期" width="160"></vxe-table-column>
             <vxe-table-column field="task_title" title="任务名称" min-width="160"></vxe-table-column>
             <vxe-table-column field="day" title="每X日" width="60"></vxe-table-column>
@@ -51,25 +52,26 @@
             <vxe-table-column field="audit_time" title="审核时间" width="160"></vxe-table-column>
             <vxe-table-column field="back_by_name" title="回溯人" width="160"></vxe-table-column>
             <vxe-table-column field="back_time" title="回溯时间" width="160"></vxe-table-column>
+            <vxe-table-column field="bz" title="补交备注" min-width="160"></vxe-table-column>
             <vxe-table-column field="" title="操作" width="220">
               <template #default="{ row }">
                 <el-button
-                    size="mini"
-                    v-if="row.completed_time.length<=0"
-                    v-show="$store.state.user.resource.task_succ"
-                    @click="handleSucc(1, row)">完成
+                  size="mini"
+                  v-if="row.completed_time.length<=0"
+                  v-show="$store.state.user.resource.task_succ"
+                  @click="handleSucc(1, row)">完成
                 </el-button>
                 <el-button
-                    size="mini"
-                    v-if="row.completed_time && row.audit_time.length<=0"
-                    v-show="$store.state.user.resource.task_audit"
-                    @click="handleAdiut(1, row)">审核
+                  size="mini"
+                  v-if="row.completed_time && row.audit_time.length<=0"
+                  v-show="$store.state.user.resource.task_audit"
+                  @click="handleAdiut(1, row)">审核
                 </el-button>
                 <el-button
-                    size="mini"
-                    v-if="row.audit_time.length>0 && row.back_time.length<=0"
-                    v-show="$store.state.user.resource.task_back"
-                    @click="handleAdiut2(1, row)">回溯
+                  size="mini"
+                  v-if="row.audit_time.length>0 && row.back_time.length<=0"
+                  v-show="$store.state.user.resource.task_back"
+                  @click="handleAdiut2(1, row)">回溯
                 </el-button>
               </template>
             </vxe-table-column>
@@ -90,6 +92,7 @@
 <script>
 
 import {auditTaskApi, auditTaskBjApi, getTaskRecordListApi, overTaskApi, overTaskBjApi} from "@/api/user";
+import fa from "element-ui/src/locale/lang/fa";
 
 export default {
   name: 'Dashboard',
@@ -107,8 +110,16 @@ export default {
   mounted() {
   },
   methods: {
+    pickerOptions: {
+      disabledDate(time) {
+        const today = new Date()
+        // 如果选择的日期在今天之后，则禁用
+        return time.getTime() > today.getTime()
+      }
+    },
     getTaskLogList() {
       getTaskRecordListApi(this.queryForm).then(res => {
+
         this.tableData = res.data.data
         this.queryForm.count = res.data.count
       })

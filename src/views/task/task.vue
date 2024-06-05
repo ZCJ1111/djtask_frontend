@@ -8,6 +8,11 @@
           </el-form-item>
           <el-form-item>
             <span shadow="never" style="color: red">
+                待完成：<span>{{ waitCount }}</span>
+            </span>
+          </el-form-item>
+          <el-form-item>
+            <span shadow="never" style="color: red">
                 未完成：<span>{{ notCount }}</span>
             </span>
           </el-form-item>
@@ -261,6 +266,7 @@ export default {
       personOpts: [],
       taskDesc: '',
       overCount: 0,
+      waitCount: 0,
       notCount: 0
     }
   },
@@ -295,8 +301,9 @@ export default {
         this.queryForm.count = res.data.count
         this.overCount = 0
         this.notCount = 0
+        this.waitCount = this.tableData.length
         for (let i = 0; i < this.tableData.length; i++) {
-          if (this.tableData[i].status){
+          if (this.tableData[i].back_person){
             this.overCount += 1
           }else{
             this.notCount += 1
@@ -355,7 +362,7 @@ export default {
 
 <style>
 .el-table .warning-row {
-  background: #f3ff4c;
+  background: #ff9849;
 }
 
 .el-table .success-row {
