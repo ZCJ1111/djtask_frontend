@@ -73,17 +73,24 @@ export const constantRoutes = [
     hidden: true,
     children: [
       {
-        path: 'task',
-        component: () => import('@/views/task/task'),
-        name: 'task',
-        meta: {title: '任务列表', icon: 'icon', noCache: true}
+        path: '/404',
+        component: Layout,
+        redirect: '/task/task',
+        hidden: true,
+        children: [
+          {
+            path: 'task',
+            component: () => import('@/views/task/task'),
+            name: 'task',
+            meta: { title: '任务列表', icon: 'icon', noCache: true }
+          }]
       },
-      // {
-      //   path: 'dashboard',
-      //   component: () => import('@/views/dashboard/index'),
-      //   name: 'Dashboard',
-      //   meta: {title: 'dashboard', icon: 'dashboard', affix: true}
-      // }
+      {
+        path: 'dashboard',
+        component: () => import('@/views/task/task'),
+        name: 'Dashboard',
+        meta: { title: 'dashboard', icon: 'dashboard', affix: true }
+      }
     ]
   },
   {
@@ -96,7 +103,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: {title: 'profile', icon: 'user', noCache: true}
+        meta: { title: 'profile', icon: 'user', noCache: true }
       }
     ]
   }
@@ -111,31 +118,31 @@ export const asyncRoutes = [
     path: '/task',
     component: Layout,
     redirect: '/task/task',
-    meta: {roles: ['admin', 'user'], title: '任务管理', icon: 'icon',},
+    meta: { roles: ['admin', 'user'], title: '任务管理', icon: 'icon' },
     children: [
       {
         path: 'task',
         component: () => import('@/views/task/task'),
         name: 'task',
-        meta: {title: '任务列表', icon: 'icon', noCache: true}
+        meta: { title: '任务列表', icon: 'icon', noCache: true }
       },
       {
         path: 'task-record',
         component: () => import('@/views/task/task-record'),
         name: 'task-record',
-        meta: {title: '任务记录', icon: 'icon', noCache: true}
+        meta: { title: '任务记录', icon: 'icon', noCache: true }
       },
       {
         path: 'task-log',
         component: () => import('@/views/task/task-log'),
         name: 'task-log',
-        meta: {title: '任务日志', icon: 'icon', noCache: true}
+        meta: { title: '任务日志', icon: 'icon', noCache: true }
       },
       {
         path: 'group',
         component: () => import('@/views/task/group'),
         name: 'group',
-        meta: {title: '任务组管理', icon: 'icon', noCache: true, roles: ['admin']}
+        meta: { title: '任务组管理', icon: 'icon', noCache: true, roles: ['admin'] }
       }
     ]
   },
@@ -143,26 +150,26 @@ export const asyncRoutes = [
     path: '/user',
     component: Layout,
     redirect: '/user/index',
-    meta: {roles: ['admin'], title: '系统管理', icon: 'icon',},
+    meta: { roles: ['admin'], title: '系统管理', icon: 'icon' },
     children: [
       {
         path: 'index',
         component: () => import('@/views/system/index'),
         name: 'user',
-        meta: {title: '用户管理', icon: 'icon', noCache: true}
+        meta: { title: '用户管理', icon: 'icon', noCache: true }
       },
       {
         path: 'role',
         component: () => import('@/views/system/role'),
         name: 'role',
-        meta: {title: '角色管理', icon: 'icon', noCache: true}
+        meta: { title: '角色管理', icon: 'icon', noCache: true }
       },
       {
         path: 'resource',
         component: () => import('@/views/system/resource'),
         name: 'resource',
-        meta: {title: '资源管理', icon: 'icon', noCache: true}
-      },
+        meta: { title: '资源管理', icon: 'icon', noCache: true }
+      }
     ]
   },
 
@@ -173,12 +180,12 @@ export const asyncRoutes = [
   // tableRouter,
 
   // 404 page must be placed at the end !!!
-  {path: '*', redirect: '/404', hidden: true}
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
 
