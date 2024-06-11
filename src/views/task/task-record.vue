@@ -39,7 +39,7 @@
           >
             <vxe-table-column field="record_time" title="Date" width="160" />
             <vxe-table-column field="task_title" title="Task_Title" min-width="160" />
-            <vxe-table-column field="day" title="Type" width="60" />
+            <vxe-table-column field="day" title="Period" width="60" />
             <vxe-table-column field="task_time_start" title="Start_Time" width="160" />
             <vxe-table-column field="task_time_end" title="Cutoff_Time" width="160" />
             <vxe-table-column field="task_group_name" title="Group" width="160" />
