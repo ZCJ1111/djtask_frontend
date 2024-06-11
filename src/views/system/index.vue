@@ -3,14 +3,14 @@
     <el-row>
       <el-card shadow="never">
         <el-form :inline="true" :model="queryForm">
-          <el-form-item label="请输入查询条件">
+          <el-form-item label="Please enter search criteria">
             <el-input v-model="queryForm.name" />
           </el-form-item>
           <el-form-item>
-            <el-button @click="queryBtn">查询</el-button>
+            <el-button @click="queryBtn">Query</el-button>
           </el-form-item>
           <el-form-item>
-            <el-button @click="catVisible=true;addForm = {}">添加</el-button>
+            <el-button @click="catVisible=true;addForm = {}">Add</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -25,56 +25,52 @@
             style="width: 100%"
           >
             <el-table-column
-              label="用户名"
+              label="Username"
               prop="name"
               width="180"
             />
             <el-table-column
-              label="姓名"
+              label="Name"
               prop="user_name"
               width="180"
             />
             <el-table-column
-              label="用户类别"
+              label="Category"
               prop="power_name"
               width="100"
             />
             <el-table-column
-              label="所属任务组"
+              label="Group"
               prop="task_group_name"
               width="140"
             />
             <el-table-column
-              label="角色"
+              label="Role"
               prop="role_name"
               width="140"
             />
             <el-table-column
-              label="性别"
+              label="Gender"
               prop="sex_name"
               width="80"
             />
-            <el-table-column
-              prop="address"
-              label="地址"
-              min-width="160"
-            />
+
             <el-table-column
               prop="phone"
-              label="电话"
+              label="Extension"
               width="140"
             />
-            <el-table-column label="操作" width="180">
+            <el-table-column label="Operation" width="180">
               <template slot-scope="scope">
                 <el-button
                   size="mini"
                   @click="handleEditV1(scope.$index, scope.row)"
-                >编辑
+                >Edit
                 </el-button>
                 <el-button
                   size="mini"
                   @click="delBtn(scope.$index, scope.row)"
-                >删除
+                >Delete
                 </el-button>
                 <!--                <el-button-->
                 <!--                  v-if="false"-->
@@ -99,24 +95,24 @@
       </el-card>
     </el-row>
     <el-dialog
-      title="编辑"
+      title="Edit"
       :visible.sync="catVisible"
       width="50%"
       :before-close="$handleClose"
     >
       <span>
         <el-form label-width="140px" :model="addForm">
-          <el-form-item label="用户名">
+          <el-form-item label="Username">
             <el-input v-model="addForm.name" />
           </el-form-item>
-          <el-form-item label="姓名">
+          <el-form-item label="Name">
             <el-input v-model="addForm.user_name" />
           </el-form-item>
-          <el-form-item label="密码">
+          <el-form-item label="Password">
             <el-input v-model="addForm.password" type="password" />
           </el-form-item>
-          <el-form-item label="所属任务组">
-            <el-select v-model="addForm.task_group" placeholder="请选择">
+          <el-form-item label="Group">
+            <el-select v-model="addForm.task_group" placeholder="Please Select">
               <el-option
                 v-for="item in taskGroupOpts"
                 :key="item.id"
@@ -125,8 +121,8 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="角色">
-            <el-select v-model="addForm.role" placeholder="请选择">
+          <el-form-item label="Role">
+            <el-select v-model="addForm.role" placeholder="Please Select">
               <el-option
                 v-for="item in roleOpts"
                 :key="item.id"
@@ -135,23 +131,20 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="性别">
-            <el-radio v-model="addForm.sex" :label="1">男</el-radio>
-            <el-radio v-model="addForm.sex" :label="2">女</el-radio>
-            <el-radio v-model="addForm.sex" :label="3">未知</el-radio>
+          <el-form-item label="Gender">
+            <el-radio v-model="addForm.sex" :label="1">Male</el-radio>
+            <el-radio v-model="addForm.sex" :label="2">Female</el-radio>
+            <el-radio v-model="addForm.sex" :label="3">Prefer not to say</el-radio>
           </el-form-item>
-          <el-form-item label="用户类别">
-            <el-radio v-model="addForm.power" :label="1">普通用户</el-radio>
-            <el-radio v-model="addForm.power" :label="3">管理员</el-radio>
+          <el-form-item label="User_Category">
+            <el-radio v-model="addForm.power" :label="1">Staff</el-radio>
+            <el-radio v-model="addForm.power" :label="3">Administrator</el-radio>
           </el-form-item>
-          <el-form-item label="地址">
-            <el-input v-model="addForm.address" />
-          </el-form-item>
-          <el-form-item label="电话">
+          <el-form-item label="Extension">
             <el-input v-model="addForm.phone" />
           </el-form-item>
           <el-form-item>
-            <el-button style="width: 100%;" @click="saveBtn">保存</el-button>
+            <el-button style="width: 100%;" @click="saveBtn">Save</el-button>
           </el-form-item>
         </el-form>
       </span>
@@ -226,8 +219,8 @@ export default {
     handleEdit(index, row) {
       adminResetPwdApi({ pk: row.id }).then(res => {
         if (res.code === 20000) {
-          this.$alert('新密码：' + res.data, '重置密码', {
-            confirmButtonText: '确定'
+          this.$alert('New Password' + res.data, 'Reset Password', {
+            confirmButtonText: 'Confirm'
           })
         }
       })

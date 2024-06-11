@@ -14,17 +14,17 @@
             style="width: 100%"
           >
             <el-table-column
-              label="创建时间"
+              label="Created Time"
               prop="created_at"
               width="160"
             />
             <el-table-column
-              label="资源名称"
+              label="Permission"
               prop="name"
               width="120"
             />
             <el-table-column
-              label="资源代号"
+              label="Function"
               prop="action"
               min-width="180"
             />

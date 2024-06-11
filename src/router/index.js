@@ -82,7 +82,7 @@ export const constantRoutes = [
             path: 'task',
             component: () => import('@/views/task/task'),
             name: 'task',
-            meta: { title: '任务列表', icon: 'icon', noCache: true }
+            meta: { title: 'Task List', icon: 'icon', noCache: true }
           }]
       },
       {
@@ -118,31 +118,31 @@ export const asyncRoutes = [
     path: '/task',
     component: Layout,
     redirect: '/task/task',
-    meta: { roles: ['admin', 'user'], title: '任务管理', icon: 'icon' },
+    meta: { roles: ['admin', 'user'], title: 'Task Management', icon: 'icon' },
     children: [
       {
         path: 'task',
         component: () => import('@/views/task/task'),
         name: 'task',
-        meta: { title: '任务列表', icon: 'icon', noCache: true }
+        meta: { title: 'Task List', icon: 'icon', noCache: true }
       },
       {
         path: 'task-record',
         component: () => import('@/views/task/task-record'),
         name: 'task-record',
-        meta: { title: '任务记录', icon: 'icon', noCache: true }
+        meta: { title: 'Task Record', icon: 'icon', noCache: true }
       },
       {
         path: 'task-log',
         component: () => import('@/views/task/task-log'),
         name: 'task-log',
-        meta: { title: '任务日志', icon: 'icon', noCache: true }
+        meta: { title: 'Operation Log', icon: 'icon', noCache: true }
       },
       {
         path: 'group',
         component: () => import('@/views/task/group'),
         name: 'group',
-        meta: { title: '任务组管理', icon: 'icon', noCache: true, roles: ['admin'] }
+        meta: { title: 'Group List', icon: 'icon', noCache: true, roles: ['admin'] }
       }
     ]
   },
@@ -150,25 +150,25 @@ export const asyncRoutes = [
     path: '/user',
     component: Layout,
     redirect: '/user/index',
-    meta: { roles: ['admin'], title: '系统管理', icon: 'icon' },
+    meta: { roles: ['admin'], title: 'System', icon: 'icon' },
     children: [
       {
         path: 'index',
         component: () => import('@/views/system/index'),
         name: 'user',
-        meta: { title: '用户管理', icon: 'icon', noCache: true }
+        meta: { title: 'User List', icon: 'icon', noCache: true }
       },
       {
         path: 'role',
         component: () => import('@/views/system/role'),
         name: 'role',
-        meta: { title: '角色管理', icon: 'icon', noCache: true }
+        meta: { title: 'Role', icon: 'icon', noCache: true }
       },
       {
         path: 'resource',
         component: () => import('@/views/system/resource'),
         name: 'resource',
-        meta: { title: '资源管理', icon: 'icon', noCache: true }
+        meta: { title: 'Permission', icon: 'icon', noCache: true }
       }
     ]
   },

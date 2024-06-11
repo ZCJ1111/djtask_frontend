@@ -9,13 +9,13 @@
               :picker-options="pickerOptions"
               type="daterange"
               value-format="yyyy-MM-dd"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+              range-separator="to"
+              start-placeholder="Start Date"
+              end-placeholder="End Date"
             />
           </el-form-item>
           <el-form-item>
-            <el-button @click="getTaskLogList">查询</el-button>
+            <el-button @click="getTaskLogList">Query</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -25,7 +25,7 @@
         <template>
           <vxe-toolbar>
             <template v-slot:buttons>
-              <vxe-button @click="openExportEvent">高级导出</vxe-button>
+              <vxe-button @click="openExportEvent">Export</vxe-button>
             </template>
           </vxe-toolbar>
 
@@ -37,45 +37,45 @@
             :export-config="{}"
             :data="tableData"
           >
-            <vxe-table-column field="record_time" title="日期" width="160" />
-            <vxe-table-column field="task_title" title="任务名称" min-width="160" />
-            <vxe-table-column field="day" title="每X日" width="60" />
-            <vxe-table-column field="task_time_start" title="开始时间" width="160" />
-            <vxe-table-column field="task_time_end" title="截止时间" width="160" />
-            <vxe-table-column field="task_group_name" title="所属组" width="160" />
-            <vxe-table-column field="task_desc" title="任务详情" min-width="160" />
-            <vxe-table-column field="person_name" title="所属人" width="160" />
-            <vxe-table-column field="creator_name" title="创建人" width="160" />
-            <vxe-table-column field="created_at" title="创建时间" width="160" />
-            <vxe-table-column field="completed_by_name" title="完成人" width="160" />
-            <vxe-table-column field="completed_time" title="完成时间" width="160" />
-            <vxe-table-column field="audit_by_name" title="审核人" width="160" />
-            <vxe-table-column field="audit_time" title="审核时间" width="160" />
-            <vxe-table-column field="back_by_name" title="回溯人" width="160" />
-            <vxe-table-column field="back_time" title="回溯时间" width="160" />
-            <vxe-table-column field="bz" title="补交备注" min-width="160" />
-            <vxe-table-column field="" title="操作" width="220">
+            <vxe-table-column field="record_time" title="Date" width="160" />
+            <vxe-table-column field="task_title" title="Task_Title" min-width="160" />
+            <vxe-table-column field="day" title="Type" width="60" />
+            <vxe-table-column field="task_time_start" title="Start_Time" width="160" />
+            <vxe-table-column field="task_time_end" title="Cutoff_Time" width="160" />
+            <vxe-table-column field="task_group_name" title="Group" width="160" />
+            <vxe-table-column field="task_desc" title="Task Description" min-width="160" />
+            <vxe-table-column field="person_name" title="Assigned To" width="160" />
+            <vxe-table-column field="creator_name" title="Creator" width="160" />
+            <vxe-table-column field="created_at" title="Created Time" width="160" />
+            <vxe-table-column field="completed_by_name" title="Submitter" width="160" />
+            <vxe-table-column field="completed_time" title="Completed Time" width="160" />
+            <vxe-table-column field="audit_by_name" title="Team Leader" width="160" />
+            <vxe-table-column field="audit_time" title="Check Time" width="160" />
+            <vxe-table-column field="back_by_name" title="R1.5 Reviewer" width="160" />
+            <vxe-table-column field="back_time" title="R1.5 Review Time" width="160" />
+            <vxe-table-column field="bz" title="Memo" min-width="160" />
+            <vxe-table-column field="" title="Operation" width="220">
               <template #default="{ row }">
                 <el-button
                   v-if="row.completed_time.length<=0"
                   v-show="$store.state.user.resource.task_succ"
                   size="mini"
                   @click="handleSucc(1, row)"
-                >完成
+                >DONE
                 </el-button>
                 <el-button
                   v-if="row.completed_time && row.audit_time.length<=0"
                   v-show="$store.state.user.resource.task_audit"
                   size="mini"
                   @click="handleAdiut(1, row)"
-                >审核
+                >TL_Check
                 </el-button>
                 <el-button
                   v-if="row.audit_time.length>0 && row.back_time.length<=0"
                   v-show="$store.state.user.resource.task_back"
                   size="mini"
                   @click="handleAdiut2(1, row)"
-                >回溯
+                >R1.5Check
                 </el-button>
               </template>
             </vxe-table-column>
@@ -144,11 +144,11 @@ export default {
       this.$refs.xTable1.openExport()
     },
     handleSucc(index, row) {
-      this.$prompt('备注', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$prompt('Memo', 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         inputPattern: /.+/,
-        inputErrorMessage: '备注不能为空'
+        inputErrorMessage: 'Memo cannot be empty'
       }).then(({ value }) => {
         console.log(index, row)
         overTaskBjApi({ id: row.task_id, bj_dt: row.record_time, bz: value }).then(res => {

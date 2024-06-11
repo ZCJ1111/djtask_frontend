@@ -4,7 +4,7 @@
       <el-card>
         <el-form :inline="true">
           <el-form-item>
-            <el-button @click="addView=true">添加</el-button>
+            <el-button @click="addView=true">ADD</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -18,31 +18,31 @@
             style="width: 100%"
           >
             <el-table-column
-              label="创建时间"
+              label="Created Time"
               prop="created_at"
               min-width="140"
             />
             <el-table-column
-              label="角色名称"
+              label="Role Name"
               prop="name"
               min-width="180"
             />
             <el-table-column
-              label="角色资源"
+              label="Permission"
               prop="resource_name"
               min-width="180"
             />
-            <el-table-column label="操作" width="160" fixed="right">
+            <el-table-column label="Operation" width="160" fixed="right">
               <template slot-scope="scope">
                 <el-button
                   size="mini"
                   @click="handleEdit(scope.$index, scope.row)"
-                >编辑
+                >Edit
                 </el-button>
                 <el-button
                   size="mini"
                   @click="handleDel(scope.row)"
-                >删除
+                >Del
                 </el-button>
               </template>
             </el-table-column>
@@ -58,18 +58,18 @@
       </el-card>
     </el-row>
     <el-dialog
-      title="添加/编辑"
+      title="Add/Edit"
       :visible.sync="addView"
       width="50%"
       :before-close="$handleClose"
     >
       <span>
         <el-form ref="addForm" :model="addForm">
-          <el-form-item label="角色名称">
+          <el-form-item label="Role Name">
             <el-input v-model="addForm.name" />
           </el-form-item>
-          <el-form-item label="角色资源">
-            <el-select v-model="addForm.resource" multiple placeholder="请选择">
+          <el-form-item label="Role Permission">
+            <el-select v-model="addForm.resource" multiple placeholder="Please Select">
               <el-option
                 v-for="item in resourceList"
                 :key="item.id"
@@ -81,8 +81,8 @@
         </el-form>
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addView = false">取 消</el-button>
-        <el-button type="primary" @click="addBtn()">确 定</el-button>
+        <el-button @click="addView = false">Cancel</el-button>
+        <el-button type="primary" @click="addBtn()">Yes</el-button>
       </span>
     </el-dialog>
   </div>
@@ -156,11 +156,10 @@ export default {
       this.addView = true
     },
     handleDel(row) {
-      console.log('1111')
       this.addForm = row
-      this.$confirm('确认删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Do you want to continue?', '提示', {
+        confirmButtonText: 'YES',
+        cancelButtonText: 'NO',
         type: 'warning'
       }).then(() => {
         adminDelRoleApi(this.addForm).then(res => {

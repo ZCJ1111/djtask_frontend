@@ -4,7 +4,7 @@
       <el-card>
         <el-form :inline="true">
           <el-form-item>
-            <el-button v-show="$store.state.user.resource.task_add" @click="addView=true">添加</el-button>
+            <el-button v-show="$store.state.user.resource.task_add" @click="addView=true">Add Task</el-button>
           </el-form-item>
           <el-form-item>
             <span shadow="never" style="color: red">
@@ -39,7 +39,7 @@
             <!--              min-width="140">-->
             <!--            </el-table-column>-->
             <el-table-column
-              label="任务名称"
+              label="TaskTitle"
               prop="task_title"
               min-width="180"
             >
@@ -53,12 +53,12 @@
             <!--              width="120">-->
             <!--            </el-table-column>-->
             <el-table-column
-              label="每X日"
+              label="Type"
               prop="day"
               width="60"
             />
             <el-table-column
-              label="截止时间"
+              label="Cutoff Time"
               prop="task_time_end"
               width="120"
             />
@@ -74,7 +74,7 @@
             <!--            </el-table-column>-->
             <el-table-column
               prop="status"
-              label="完成状态"
+              label="Status"
               width="80"
             >
               <template slot-scope="scope">
@@ -89,12 +89,12 @@
             <!--            </el-table-column>-->
             <el-table-column
               prop="over_person"
-              label="完成人"
+              label="Staff"
               width="120"
             />
             <el-table-column
               prop="audit_person"
-              label="审核人"
+              label="TL_Check"
               width="120"
             />
             <!--            <el-table-column-->
@@ -104,7 +104,7 @@
             <!--            </el-table-column>-->
             <el-table-column
               prop="back_person"
-              label="回溯人"
+              label="R1.5_Check"
               width="120"
             />
             <!--            <el-table-column-->
@@ -112,34 +112,34 @@
             <!--              label="回溯时间"-->
             <!--              width="120">-->
             <!--            </el-table-column>-->
-            <el-table-column label="操作" width="160" fixed="right">
+            <el-table-column label="Operation" width="160" fixed="right">
               <template slot-scope="scope" style="text-align: center">
                 <el-button
                   v-show="$store.state.user.resource.task_del"
                   size="mini"
                   @click="handleDel(scope.$index, scope.row)"
-                >删除
+                >DEL
                 </el-button>
                 <el-button
                   v-show="$store.state.user.resource.task_succ"
                   v-if="!scope.row.status & scope.row.person_name===$store.state.user.name"
                   size="mini"
                   @click="handleSucc(scope.$index, scope.row)"
-                >完成
+                >DONE
                 </el-button>
                 <el-button
                   v-show="$store.state.user.resource.task_audit"
                   v-if="!scope.row.audit_person & scope.row.status"
                   size="mini"
                   @click="handleAdiut(scope.$index, scope.row)"
-                >审核
+                >TL_Check
                 </el-button>
                 <el-button
                   v-show="$store.state.user.resource.task_back"
                   v-if="scope.row.audit_person.length>0 & scope.row.back_person.length===0 "
                   size="mini"
                   @click="handleAdiut2(scope.$index, scope.row)"
-                >回溯
+                >R1.5_Check
                 </el-button>
               </template>
             </el-table-column>
@@ -156,7 +156,7 @@
     </el-row>
 
     <el-dialog
-      title="添加/编辑任务"
+      title="Add Task"
       :visible.sync="addView"
       width="30%"
       :before-close="$handleClose"
@@ -164,42 +164,42 @@
       <span>
 
         <el-form ref="addForm" :model="addForm" label-width="120px">
-          <el-form-item label="任务名称">
+          <el-form-item label="Task Title">
             <el-input v-model="addForm.task_title" />
           </el-form-item>
-          <el-form-item label="任务详情">
+          <el-form-item label="Task Description">
             <el-input
               v-model="addForm.task_desc"
               type="textarea"
               :rows="4"
             />
           </el-form-item>
-          <el-form-item label="每X天">
+          <el-form-item label="Period(Type)">
             <el-col :span="12"><el-input v-model="addForm.day" /></el-col>
 
           </el-form-item>
-          <el-form-item label="开始时间">
+          <el-form-item label="Start Time">
             <el-time-picker
               v-model="addForm.task_time_start"
               value-format="HH:mm:ss"
               :picker-options="{
                 selectableRange: '00:00:00 - 23:59:59'
               }"
-              placeholder="任意时间点"
+              placeholder="Any Time"
             />
           </el-form-item>
-          <el-form-item label="截止时间">
+          <el-form-item label="CutOff Time">
             <el-time-picker
               v-model="addForm.task_time_end"
               value-format="HH:mm:ss"
               :picker-options="{
                 selectableRange: '00:00:00 - 23:59:59'
               }"
-              placeholder="任意时间点"
+              placeholder="Any Time"
             />
           </el-form-item>
-          <el-form-item label="所属组">
-            <el-select v-model="addForm.task_group" placeholder="请选择" @change="getOverUserList">
+          <el-form-item label="Task Group">
+            <el-select v-model="addForm.task_group" placeholder="Select" @change="getOverUserList">
               <el-option
                 v-for="item in taskGroupOpts"
                 :key="item.id"
@@ -208,8 +208,8 @@
               />
             </el-select>
           </el-form-item>
-          <el-form-item label="所属人">
-            <el-select v-model="addForm.person" placeholder="请选择">
+          <el-form-item label="Assign To">
+            <el-select v-model="addForm.person" placeholder="Select">
               <el-option
                 v-for="item in personOpts"
                 :key="item.id"
@@ -221,13 +221,13 @@
         </el-form>
       </span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="addView = false">取 消</el-button>
-        <el-button type="primary" @click="saveBtn">确 定</el-button>
+        <el-button @click="addView = false">Cancel</el-button>
+        <el-button type="primary" @click="saveBtn">Save</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
-      title="任务详情"
+      title="Task Description"
       :visible.sync="taskDescView"
       width="30%"
       :before-close="$handleClose"
