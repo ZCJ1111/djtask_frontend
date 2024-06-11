@@ -177,7 +177,7 @@ export default {
 
 <style>
 .el-table .warning-row {
-  background: #ff9849;
+  background: #D3D3D3;
 }
 
 .el-table .success-row {
