@@ -4,7 +4,7 @@
       <el-card>
         <el-form :inline="true">
           <el-form-item>
-            <el-button @click="addView=true" v-show="$store.state.user.resource.task_group_add">添加</el-button>
+            <el-button v-show="$store.state.user.resource.task_group_add" @click="addView=true">添加</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -15,26 +15,31 @@
           <el-table
             border
             :data="tableData"
-            style="width: 100%">
+            style="width: 100%"
+          >
             <el-table-column
-              label="创建时间"
+              label="Created Time"
               prop="created_at"
-              min-width="140">
-            </el-table-column>
+              min-width="140"
+            />
             <el-table-column
-              label="组名称"
+              label="Group Name"
               prop="name"
-              min-width="180">
-            </el-table-column>
-            <el-table-column label="操作" width="160" fixed="right">
+              min-width="180"
+            />
+            <el-table-column label="Operator" width="160" fixed="right">
               <template slot-scope="scope">
                 <el-button
+                  v-show="$store.state.user.resource.task_group_edit"
                   size="mini"
-                  @click="handleEdit(scope.$index, scope.row)" v-show="$store.state.user.resource.task_group_edit" >编辑
+                  @click="handleEdit(scope.$index, scope.row)"
+                >Edit
                 </el-button>
                 <el-button
+                  v-show="$store.state.user.resource.task_group_del"
                   size="mini"
-                  @click="handleDel(scope.row)" v-show="$store.state.user.resource.task_group_del" >删除
+                  @click="handleDel(scope.row)"
+                >Delete
                 </el-button>
               </template>
             </el-table-column>
@@ -44,41 +49,44 @@
           style="margin-top: 20px;"
           background
           layout="prev, pager, next"
+          :total="queryForm.count"
           @current-change="changePage"
-          :total="queryForm.count">
-        </el-pagination>
+        />
       </el-card>
     </el-row>
     <el-dialog
-      title="添加/编辑"
+      title="Add/Edit"
       :visible.sync="addView"
       width="50%"
-      :before-close="$handleClose">
+      :before-close="$handleClose"
+    >
       <span>
         <el-form ref="addForm" :model="addForm">
-          <el-form-item label="组名称">
-            <el-input v-model="addForm.name"></el-input>
+          <el-form-item label="Group">
+            <el-input v-model="addForm.name" />
           </el-form-item>
         </el-form>
       </span>
       <span slot="footer" class="dialog-footer">
-    <el-button @click="addView = false">取 消</el-button>
-    <el-button type="primary" @click="addBtn()">确 定</el-button>
-  </span>
+        <el-button @click="addView = false">Cancel</el-button>
+        <el-button type="primary" @click="addBtn()">Yes</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
 
-import {
-  addStaffApi, admin_del_user_api,
-  admin_save_user_api, adminAddGroupApi, adminDelGroupApi,
-  adminGetUserListApi,
-  adminResetPwdApi,
-  delStaffApi, getGroupListApi,
-  getStaffListApi
-} from "@/api/user";
+// import {
+//   addStaffApi, admin_del_user_api,
+//   admin_save_user_api, adminAddGroupApi, adminDelGroupApi,
+//   adminGetUserListApi,
+//   adminResetPwdApi,
+//   delStaffApi, getGroupListApi,
+//   getStaffListApi
+// } from '@/api/user'
+
+import { adminAddGroupApi, adminDelGroupApi, getGroupListApi } from '@/api/user'
 
 export default {
   name: 'Dashboard',
@@ -109,40 +117,37 @@ export default {
       this.addForm = {}
     },
     addBtn() {
-
       adminAddGroupApi(this.addForm).then(res => {
         this.$message({
-          type: "success",
+          type: 'success',
           message: res.message
         })
         this.addView = false
         this.getGroupList()
       })
-
     },
     handleEdit(index, row) {
       this.addForm = row
       this.addView = true
     },
     handleDel(row) {
-      console.log("1111");
+      console.log('1111')
       this.addForm = row
-      this.$confirm('确认删除, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm('Do you want to continue?', 'Warning', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
         type: 'warning'
       }).then(() => {
         adminDelGroupApi(this.addForm).then(res => {
           this.$message({
-            type: "success",
+            type: 'success',
             message: res.message
           })
           this.getGroupList()
         })
       }).catch(() => {
 
-      });
-
+      })
     }
 
   }
