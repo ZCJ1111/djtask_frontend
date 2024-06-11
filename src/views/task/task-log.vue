@@ -1,7 +1,6 @@
 <template>
   <div class="app-container">
-    <el-row>
-    </el-row>
+    <el-row />
     <el-row>
       <el-card shadow="never">
         <template>
@@ -9,28 +8,28 @@
             :row-class-name="tableRowClassName"
             border
             :data="tableData"
-            style="width: 100%">
-                        <el-table-column
-                          label="操作人"
-                          prop="person_name"
-                          min-width="140">
-                        </el-table-column>
+            style="width: 100%"
+          >
+            <el-table-column
+              label="操作人"
+              prop="person_name"
+              min-width="140"
+            />
             <el-table-column
               label="操作时间"
               prop="created_at"
-              width="180">
-
-            </el-table-column>
+              width="180"
+            />
             <el-table-column
               label="行为"
               prop="action"
-              width="120">
-            </el-table-column>
+              width="120"
+            />
             <el-table-column
               prop="content"
               label="操作内容"
-              min-width="480">
-            </el-table-column>
+              min-width="480"
+            />
           </el-table>
         </template>
         <el-pagination
@@ -38,8 +37,8 @@
           background
           layout="total, prev, pager, next "
           :total="queryForm.count"
-          @current-change="changePage">
-        </el-pagination>
+          @current-change="changePage"
+        />
       </el-card>
     </el-row>
   </div>
@@ -47,7 +46,7 @@
 
 <script>
 
-import {getTaskListApi, getTaskLogListApi} from "@/api/user";
+import { getTaskLogListApi } from '@/api/user'
 
 export default {
   name: 'Dashboard',
@@ -57,7 +56,7 @@ export default {
       queryForm: {
         limit: 10,
         page: 1
-      },
+      }
     }
   },
   mounted() {
@@ -80,7 +79,7 @@ export default {
 
 <style>
 .el-table .warning-row {
-  background: #ff9849;
+  background: #D3D3D3;
 }
 
 .el-table .success-row {

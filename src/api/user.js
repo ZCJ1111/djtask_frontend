@@ -20,7 +20,7 @@ export function getInfo(token) {
   return request({
     url: '/user/get_user_info/',
     method: 'get',
-    params: {token}
+    params: { token }
   })
 }
 
@@ -107,8 +107,6 @@ export function getOverGroupListApi(data) {
     params: data
   })
 }
-
-
 
 export function adminAddRoleApi(data) {
   return request({

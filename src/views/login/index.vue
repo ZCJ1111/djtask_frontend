@@ -6,7 +6,7 @@
         <h3 class="title">
           {{ $t('login.title') }}
         </h3>
-<!--        <lang-select class="set-language" />-->
+        <!--        <lang-select class="set-language" />-->
       </div>
 
       <el-form-item prop="username">
@@ -59,7 +59,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import {reg_user} from "@/api/user";
+import { reg_user } from '@/api/user'
 
 export default {
   name: 'Login',
@@ -126,12 +126,12 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
-    regBtn(){
+    regBtn() {
       // 注册
-      reg_user(this.regForm).then( res => {
+      reg_user(this.regForm).then(res => {
         if (res.code === 20000) {
           this.$message({
-            type: "success",
+            type: 'success',
             message: res.message
           })
           this.showDialog = false

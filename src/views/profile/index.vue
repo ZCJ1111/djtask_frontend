@@ -4,22 +4,20 @@
       <el-col :span="10" :offset="6">
         <el-card shadow="never">
           <el-form label-width="140px" :model="userInfo">
-
-            </el-form-item>
             <el-form-item label="用户名">
-              <el-input disabled="true" v-model="userInfo.name"></el-input>
+              <el-input v-model="userInfo.name" disabled="true" />
             </el-form-item>
             <el-form-item label="密码">
-              <el-input v-model="userInfo.password" type="password"></el-input>
+              <el-input v-model="userInfo.password" type="password" />
             </el-form-item>
             <el-form-item label="姓名">
-              <el-input v-model="userInfo.user_name"></el-input>
+              <el-input v-model="userInfo.user_name" />
             </el-form-item>
             <el-form-item label="所属组">
-              <el-input v-model="userInfo.task_group_name" :disabled="true"></el-input>
+              <el-input v-model="userInfo.task_group_name" :disabled="true" />
             </el-form-item>
             <el-form-item label="角色">
-              <el-input v-model="userInfo.role_name" :disabled="true"></el-input>
+              <el-input v-model="userInfo.role_name" :disabled="true" />
             </el-form-item>
             <el-form-item label="性别">
               <el-radio v-model="userInfo.sex" :label="1">男</el-radio>
@@ -27,10 +25,10 @@
               <el-radio v-model="userInfo.sex" :label="3">未知</el-radio>
             </el-form-item>
             <el-form-item label="地址">
-              <el-input v-model="userInfo.address"></el-input>
+              <el-input v-model="userInfo.address" />
             </el-form-item>
             <el-form-item label="电话">
-              <el-input v-model="userInfo.phone"></el-input>
+              <el-input v-model="userInfo.phone" />
             </el-form-item>
             <el-form-item>
               <el-button style="width: 100%;" @click="saveBtn">保存</el-button>
@@ -45,7 +43,7 @@
 
 <script>
 
-import {getUserApi, saveUserApi} from "@/api/user";
+import { getUserApi, saveUserApi } from '@/api/user'
 
 export default {
   name: 'Profile',
@@ -67,8 +65,7 @@ export default {
     },
     handleSuccess(response, file, fieList) {
       this.userInfo.image = response.data
-      this.imageUrl = URL.createObjectURL(file.raw);
-
+      this.imageUrl = URL.createObjectURL(file.raw)
     },
     saveBtn() {
       saveUserApi(this.userInfo).then(res => {
