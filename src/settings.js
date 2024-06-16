@@ -1,5 +1,5 @@
 module.exports = {
-  title: '任务系统',
+  title: 'CPD Checklist',
 
   /**
    * @type {boolean} true | false

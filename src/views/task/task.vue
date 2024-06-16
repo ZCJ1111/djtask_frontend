@@ -167,14 +167,14 @@
           <el-form-item label="Task Title">
             <el-input v-model="addForm.task_title" />
           </el-form-item>
-          <el-form-item label="Task Description">
+          <el-form-item label="Description">
             <el-input
               v-model="addForm.task_desc"
               type="textarea"
               :rows="4"
             />
           </el-form-item>
-          <el-form-item label="Period(Type)">
+          <el-form-item label="Type">
             <el-col :span="12"><el-input v-model="addForm.day" /></el-col>
 
           </el-form-item>
@@ -227,7 +227,7 @@
     </el-dialog>
 
     <el-dialog
-      title="Task Description"
+      title="Description"
       :visible.sync="taskDescView"
       width="30%"
       :before-close="$handleClose"

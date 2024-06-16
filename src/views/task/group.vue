@@ -4,7 +4,7 @@
       <el-card>
         <el-form :inline="true">
           <el-form-item>
-            <el-button v-show="$store.state.user.resource.task_group_add" @click="addView=true">添加</el-button>
+            <el-button v-show="$store.state.user.resource.task_group_add" @click="addView=true">Add</el-button>
           </el-form-item>
         </el-form>
       </el-card>
