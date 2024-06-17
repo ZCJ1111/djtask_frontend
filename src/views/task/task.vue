@@ -7,7 +7,7 @@
             <el-button v-show="$store.state.user.resource.task_add" @click="addView=true">Add Task</el-button>
           </el-form-item>
           <el-form-item>
-            <span shadow="never" style="color: red">
+            <span shadow="never" style="color: black">
               Total：<span>{{ waitCount }}</span>
             </span>
           </el-form-item>
@@ -17,7 +17,7 @@
             </span>
           </el-form-item>
           <el-form-item>
-            <span shadow="never">
+            <span shadow="never" style="color: green">
               Completed:<span>{{ overCount }}</span>
             </span>
           </el-form-item>
@@ -29,8 +29,9 @@
         <template>
           <el-table
             :row-class-name="tableRowClassName"
-
             :data="tableData"
+            :default-sort="{prop: 'task_time_end', order: 'descending'}"
+            :cell-style="{padding: '0', height: 'px'}"
             style="width: 100%"
           >
             <!--            <el-table-column-->
@@ -60,6 +61,7 @@
             <el-table-column
               label="Cutoff Time"
               prop="task_time_end"
+              sortable
               width="120"
             />
             <!--            <el-table-column-->
@@ -112,18 +114,14 @@
             <!--              label="回溯时间"-->
             <!--              width="120">-->
             <!--            </el-table-column>-->
-            <el-table-column label="Operation" width="160" fixed="right">
-              <template slot-scope="scope" style="text-align: center">
-                <el-button
-                  v-show="$store.state.user.resource.task_del"
-                  size="mini"
-                  @click="handleDel(scope.$index, scope.row)"
-                >DEL
-                </el-button>
+            <el-table-column label="Operation" width="150" fixed="right">
+              <template slot-scope="scope">
                 <el-button
                   v-show="$store.state.user.resource.task_succ"
                   v-if="!scope.row.status & scope.row.person_name===$store.state.user.name"
                   size="mini"
+                  type="success"
+                  autofocus="true"
                   @click="handleSucc(scope.$index, scope.row)"
                 >DONE
                 </el-button>
@@ -140,6 +138,13 @@
                   size="mini"
                   @click="handleAdiut2(scope.$index, scope.row)"
                 >R1.5_Check
+                </el-button>
+                <el-button
+                  v-show="$store.state.user.resource.task_del"
+                  size="mini"
+                  type="danger"
+                  @click="handleDel(scope.$index, scope.row)"
+                >DEL
                 </el-button>
               </template>
             </el-table-column>
