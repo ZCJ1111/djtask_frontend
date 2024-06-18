@@ -4,20 +4,23 @@
       <el-card>
         <el-form :inline="true">
           <el-form-item>
-            <el-button v-show="$store.state.user.resource.task_add" @click="addView=true">Add Task</el-button>
+            <el-button v-show="$store.state.user.resource.task_add" type="primary" @click="addView=true">Add Task</el-button>
           </el-form-item>
           <el-form-item>
             <span shadow="never" style="color: black">
+              <i class="el-icon-document" />
               Total：<span>{{ waitCount }}</span>
             </span>
           </el-form-item>
           <el-form-item>
             <span shadow="never" style="color: red">
+              <i class="el-icon-loading" />
               Incomplete:<span>{{ notCount }}</span>
             </span>
           </el-form-item>
           <el-form-item>
             <span shadow="never" style="color: green">
+              <i class="el-icon-document-checked" />
               Completed:<span>{{ overCount }}</span>
             </span>
           </el-form-item>
@@ -121,7 +124,6 @@
                   v-if="!scope.row.status & scope.row.person_name===$store.state.user.name"
                   size="mini"
                   type="success"
-                  autofocus="true"
                   @click="handleSucc(scope.$index, scope.row)"
                 >DONE
                 </el-button>
@@ -129,6 +131,7 @@
                   v-show="$store.state.user.resource.task_audit"
                   v-if="!scope.row.audit_person & scope.row.status"
                   size="mini"
+                  type="success"
                   @click="handleAdiut(scope.$index, scope.row)"
                 >TL_Check
                 </el-button>
@@ -136,6 +139,7 @@
                   v-show="$store.state.user.resource.task_back"
                   v-if="scope.row.audit_person.length>0 & scope.row.back_person.length===0 "
                   size="mini"
+                  type="success"
                   @click="handleAdiut2(scope.$index, scope.row)"
                 >R1.5_Check
                 </el-button>
@@ -381,12 +385,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-table .warning-row {
   background: #D3D3D3;
 }
 
 .el-table .success-row {
   background: #f0f9eb;
+}
+
+.el-button {
+  padding: 2px 5px;
+  font-size: 15px;
 }
 </style>
