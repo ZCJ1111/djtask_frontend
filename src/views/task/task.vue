@@ -65,7 +65,7 @@
               label="Cutoff Time"
               prop="task_time_end"
               sortable
-              width="120"
+              width="125"
             />
             <!--            <el-table-column-->
             <!--              prop="task_group_name"-->
@@ -133,7 +133,7 @@
                   size="mini"
                   type="success"
                   @click="handleAdiut(scope.$index, scope.row)"
-                >TL_Check
+                >TL
                 </el-button>
                 <el-button
                   v-show="$store.state.user.resource.task_back"
@@ -141,7 +141,7 @@
                   size="mini"
                   type="success"
                   @click="handleAdiut2(scope.$index, scope.row)"
-                >R1.5_Check
+                >R1.5
                 </el-button>
                 <el-button
                   v-show="$store.state.user.resource.task_del"
@@ -207,7 +207,7 @@
               placeholder="Any Time"
             />
           </el-form-item>
-          <el-form-item label="Task Group">
+          <el-form-item label="Group">
             <el-select v-model="addForm.task_group" placeholder="Select" @change="getOverUserList">
               <el-option
                 v-for="item in taskGroupOpts"
@@ -396,6 +396,6 @@ export default {
 
 .el-button {
   padding: 2px 5px;
-  font-size: 15px;
+  font-size: 17px;
 }
 </style>

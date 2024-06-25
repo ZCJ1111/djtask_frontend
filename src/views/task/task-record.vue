@@ -37,24 +37,24 @@
             :export-config="{}"
             :data="tableData"
           >
-            <vxe-table-column field="record_time" title="Date" width="160" />
-            <vxe-table-column field="task_title" title="Task_Title" min-width="160" />
+            <vxe-table-column field="record_time" title="Date" width="130" />
+            <vxe-table-column field="task_title" title="Task_Title" min-width="130" />
             <vxe-table-column field="day" title="Type" width="60" />
             <vxe-table-column field="task_time_start" title="Start_Time" width="160" />
             <vxe-table-column field="task_time_end" title="Cutoff_Time" width="160" />
-            <vxe-table-column field="task_group_name" title="Group" width="160" />
-            <vxe-table-column field="task_desc" title="Description" min-width="160" />
-            <vxe-table-column field="person_name" title="Assigned To" width="160" />
-            <vxe-table-column field="creator_name" title="Creator" width="160" />
+            <vxe-table-column field="task_group_name" title="Group" width="150" />
+            <vxe-table-column field="task_desc" title="Description" min-width="180" />
+            <vxe-table-column field="person_name" title="Assigned To" width="130" />
+            <vxe-table-column field="creator_name" title="Creator" width="130" />
             <vxe-table-column field="created_at" title="Created Time" width="160" />
-            <vxe-table-column field="completed_by_name" title="Submitter" width="160" />
-            <vxe-table-column field="completed_time" title="Completed Time" width="160" />
-            <vxe-table-column field="audit_by_name" title="Team Leader" width="160" />
-            <vxe-table-column field="audit_time" title="Check Time" width="160" />
-            <vxe-table-column field="back_by_name" title="R1.5 Reviewer" width="160" />
-            <vxe-table-column field="back_time" title="R1.5 Review Time" width="160" />
-            <vxe-table-column field="bz" title="Memo" min-width="160" />
-            <vxe-table-column field="" title="Operation" width="220">
+            <vxe-table-column field="completed_by_name" title="Submitter" width="130" />
+            <vxe-table-column field="completed_time" title="Completed Time" width="130" />
+            <vxe-table-column field="audit_by_name" title="Team Leader" width="130" />
+            <vxe-table-column field="audit_time" title="Check Time" width="130" />
+            <vxe-table-column field="back_by_name" title="R1.5 Reviewer" width="130" />
+            <vxe-table-column field="back_time" title="R1.5 ReviewTime" width="140" />
+            <vxe-table-column field="bz" title="Memo" min-width="140" />
+            <vxe-table-column field="" title="Operation" width="120">
               <template #default="{ row }">
                 <el-button
                   v-if="row.completed_time.length<=0"

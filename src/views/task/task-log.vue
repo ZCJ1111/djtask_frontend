@@ -11,23 +11,23 @@
             style="width: 100%"
           >
             <el-table-column
-              label="操作人"
+              label="Operator"
               prop="person_name"
               min-width="140"
             />
             <el-table-column
-              label="操作时间"
+              label="Operation Time"
               prop="created_at"
               width="180"
             />
             <el-table-column
-              label="行为"
+              label="Action"
               prop="action"
               width="120"
             />
             <el-table-column
               prop="content"
-              label="操作内容"
+              label="Content"
               min-width="480"
             />
           </el-table>
