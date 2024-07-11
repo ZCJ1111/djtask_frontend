@@ -147,10 +147,10 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/user',
+    path: '/system',
     component: Layout,
-    redirect: '/user/index',
-    meta: { roles: ['admin'], title: 'System', icon: 'icon' },
+    redirect: '/system/index',
+    meta: { roles: ['admin'], title: 'System Management', icon: 'icon' },
     children: [
       {
         path: 'index',
@@ -171,6 +171,22 @@ export const asyncRoutes = [
         meta: { title: 'Permission', icon: 'icon', noCache: true }
       }
     ]
+  },
+
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/index',
+    meta: { roles: ['admin', 'user'], title: 'User Manual', icon: 'icon' },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/user/index'),
+        name: 'user',
+        meta: { title: 'User Manual', icon: 'icon', noCache: true }
+      }
+    ]
+
   },
 
   /** when your routing map is too long, you can split it into small modules **/
