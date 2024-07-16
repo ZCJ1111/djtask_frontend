@@ -33,7 +33,7 @@
           <el-table
             :row-class-name="tableRowClassName"
             :data="tableData"
-            :default-sort="{prop: 'task_time_end', order: 'descending'}"
+            :default-sort="{prop: ['task_time_end','Group'], order: 'descending'}"
             :cell-style="{padding: '0', height: 'px'}"
             style="width: 100%"
           >
@@ -67,11 +67,12 @@
               sortable
               width="125"
             />
-            <!--            <el-table-column-->
-            <!--              prop="task_group_name"-->
-            <!--              label="所属组"-->
-            <!--              width="120">-->
-            <!--            </el-table-column>-->
+            <el-table-column
+              prop="task_group_name"
+              label="Group"
+              sortable
+              width="130"
+            />
             <!--            <el-table-column-->
             <!--              prop="person_name"-->
             <!--              label="所属人"-->
